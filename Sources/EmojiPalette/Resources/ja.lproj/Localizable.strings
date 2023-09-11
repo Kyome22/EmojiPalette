@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Takuto Nakamura on 2023/09/11.
+  
+*/
+
+"smileysAndPeople" = "スマイリーと人々";
+"animalsAndNature" = "動物と自然";
+"foodAndDrink" = "食べ物と飲み物";
+"activity" = "活動";
+"travelAndPlaces" = "旅行と場所";
+"objects" = "物";
+"symbols" = "記号";
+"flags" = "旗";

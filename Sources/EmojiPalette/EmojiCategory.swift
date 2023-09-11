@@ -6,6 +6,8 @@
  
 */
 
+import SwiftUI
+
 public enum EmojiCategory: String, Identifiable, CaseIterable {
     case smileysAndPeople
     case animalsAndNature
@@ -20,25 +22,8 @@ public enum EmojiCategory: String, Identifiable, CaseIterable {
         return rawValue
     }
 
-    public var label: String {
-        switch self {
-        case .smileysAndPeople:
-            return "Smileys & People"
-        case .animalsAndNature:
-            return "Animals & Nature"
-        case .foodAndDrink:
-            return "Food & Drink"
-        case .activity:
-            return "Activity"
-        case .travelAndPlaces:
-            return "Travel & Places"
-        case .objects:
-            return "Objects"
-        case .symbols:
-            return "Symbols"
-        case .flags:
-            return "Flags"
-        }
+    public var label: LocalizedStringKey {
+        return LocalizedStringKey(rawValue)
     }
 
     public var imageName: String {

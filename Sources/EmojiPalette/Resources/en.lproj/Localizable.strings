@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Takuto Nakamura on 2023/09/11.
+  
+*/
+
+"smileysAndPeople" = "Smileys & People";
+"animalsAndNature" = "Animals & Nature";
+"foodAndDrink" = "Food & Drink";
+"activity" = "Activity";
+"travelAndPlaces" = "Travel & Places";
+"objects" = "Objects";
+"symbols" = "Symbols";
+"flags" = "Flags";

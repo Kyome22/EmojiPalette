@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "EmojiPalette",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v16)
     ],
