@@ -36,3 +36,8 @@ struct ContentView: View {
     }
 }
 ```
+
+## Localization
+
+- English (en)
+- Japanese (ja)
