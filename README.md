@@ -4,6 +4,13 @@ Emoji Picker for iOS using SwiftUI.
 
 <img src="./sample.png" width="300px" />
 
+## Requirements
+
+- Development with Xcode 14.3.1+
+- Written in Swift 5
+- swift-tools-version: 5.8
+- Compatible with iOS 16.4+
+
 ## Usage
 
 ```swift
