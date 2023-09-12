@@ -48,6 +48,7 @@ public struct EmojiPaletteView: View {
             HStack(spacing: 8) {
                 ForEach(EmojiCategory.allCases) { emojiCategory in
                     Image(systemName: emojiCategory.imageName)
+                        .font(.system(size: 18))
                         .frame(width: 24, height: 24)
                         .foregroundColor(selection == emojiCategory ? Color.accentColor : .secondary)
                         .onTapGesture {
@@ -57,7 +58,7 @@ public struct EmojiPaletteView: View {
             }
             .padding(8)
         }
-        .frame(width: 264, height: 320) // width = (2 * 16) + (6 * 32) + (5 * 8) = 264
+        .frame(width: 264, height: 280) // width = (2 * 16) + (6 * 32) + (5 * 8) = 264
     }
 }
 
