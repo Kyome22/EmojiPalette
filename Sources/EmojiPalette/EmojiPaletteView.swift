@@ -21,45 +21,40 @@ public struct EmojiPaletteView: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            ScrollViewReader { proxy in
+            if let emojiSet = emojiSets.first(where: { $0.category == selection }) {
                 List {
-                    ForEach(emojiSets) { emojiSet in
-                        Section {
-                            LazyVGrid(columns: columns, spacing: 8) {
-                                ForEach(emojiSet.emojis) { emoji in
-                                    Button {
-                                        selectedEmoji = emoji.character
-                                    } label: {
-                                        Text(emoji.character)
-                                            .font(.title)
-                                    }
-                                    .buttonStyle(.borderless)
+                    Section {
+                        LazyVGrid(columns: columns, spacing: 8) {
+                            ForEach(emojiSet.emojis) { emoji in
+                                Button {
+                                    selectedEmoji = emoji.character
+                                } label: {
+                                    Text(emoji.character)
+                                        .font(.title)
                                 }
+                                .buttonStyle(.borderless)
                             }
-                        } header: {
-                            Text(emojiSet.category.label, bundle: .module)
-                                .id(emojiSet.category)
                         }
-                        .textCase(.none)
+                    } header: {
+                        Text(emojiSet.category.label, bundle: .module)
                     }
+                    .textCase(.none)
                 }
                 .listStyle(.plain)
-                Divider()
-                HStack {
-                    ForEach(EmojiCategory.allCases) { emojiCategory in
-                        Image(systemName: emojiCategory.imageName)
-                            .foregroundColor(selection == emojiCategory ? Color.accentColor : .secondary)
-                            .frame(maxWidth: .infinity)
-                            .onTapGesture {
-                                selection = emojiCategory
-                                withAnimation {
-                                    proxy.scrollTo(emojiCategory, anchor: UnitPoint.top)
-                                }
-                            }
-                    }
-                }
-                .padding(8)
+                .id(selection)
             }
+            Divider()
+            HStack {
+                ForEach(EmojiCategory.allCases) { emojiCategory in
+                    Image(systemName: emojiCategory.imageName)
+                        .foregroundColor(selection == emojiCategory ? Color.accentColor : .secondary)
+                        .frame(maxWidth: .infinity)
+                        .onTapGesture {
+                            selection = emojiCategory
+                        }
+                }
+            }
+            .padding(8)
         }
         .frame(width: 240, height: 320)
     }
