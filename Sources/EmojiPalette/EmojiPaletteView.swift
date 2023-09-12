@@ -16,7 +16,7 @@ public struct EmojiPaletteView: View {
 
     public init(selectedEmoji: Binding<String>) {
         _selectedEmoji = selectedEmoji
-        emojiSets = EmojiParser.shared.emojiSet
+        emojiSets = EmojiParser.shared.emojiSets
     }
 
     public var body: some View {
@@ -30,9 +30,10 @@ public struct EmojiPaletteView: View {
                                     selectedEmoji = emoji.character
                                 } label: {
                                     Text(emoji.character)
-                                        .font(.title)
+                                        .font(.system(size: 26))
                                 }
                                 .buttonStyle(.borderless)
+                                .frame(width: 32, height: 32)
                             }
                         }
                     } header: {
@@ -44,11 +45,11 @@ public struct EmojiPaletteView: View {
                 .id(selection)
             }
             Divider()
-            HStack {
+            HStack(spacing: 8) {
                 ForEach(EmojiCategory.allCases) { emojiCategory in
                     Image(systemName: emojiCategory.imageName)
+                        .frame(width: 24, height: 24)
                         .foregroundColor(selection == emojiCategory ? Color.accentColor : .secondary)
-                        .frame(maxWidth: .infinity)
                         .onTapGesture {
                             selection = emojiCategory
                         }
@@ -56,7 +57,7 @@ public struct EmojiPaletteView: View {
             }
             .padding(8)
         }
-        .frame(width: 240, height: 320)
+        .frame(width: 264, height: 320) // width = (2 * 16) + (6 * 32) + (5 * 8) = 264
     }
 }
 

@@ -19,7 +19,7 @@ import EmojiPalette
 
 struct ContentView: View {
     @State var showPopover: Bool = false
-    @State var emoji: String = "💪"
+    @State var emoji: String = ""
 
     var body: some View {
         VStack {
@@ -33,6 +33,9 @@ struct ContentView: View {
                           isPresented: $showPopover)
         }
         .padding()
+        .onAppear {
+            emoji = EmojiParser.shared.randomEmoji().character
+        }
     }
 }
 ```

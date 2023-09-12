@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-final class EmojiParser {
-    static let shared = EmojiParser()
+public final class EmojiParser {
+    public static let shared = EmojiParser()
 
-    private var _emojiSet = [EmojiSet]()
+    private var _emojiSets = [EmojiSet]()
 
-    var emojiSet: [EmojiSet] {
-        return _emojiSet
+    public var emojiSets: [EmojiSet] {
+        return _emojiSets
     }
 
     private init() {
@@ -24,10 +24,10 @@ final class EmojiParser {
                 return
             }
             let emojis = group.subgroups.flatMap { $0.emojis }
-            if _emojiSet.last?.category == category {
-                _emojiSet[_emojiSet.count - 1].emojis += emojis
+            if _emojiSets.last?.category == category {
+                _emojiSets[_emojiSets.count - 1].emojis += emojis
             } else {
-                _emojiSet.append(EmojiSet(category: category, emojis: emojis))
+                _emojiSets.append(EmojiSet(category: category, emojis: emojis))
             }
         }
     }
@@ -76,5 +76,13 @@ final class EmojiParser {
             }
         }
         return groups
+    }
+
+    public func randomEmoji(categories: [EmojiCategory] = EmojiCategory.allCases) -> Emoji {
+        let emojiSet = _emojiSets.filter { categories.contains($0.category) }.randomElement()
+        guard let emoji = emojiSet?.emojis.randomElement() else {
+            fatalError("Could not get random emoji")
+        }
+        return emoji
     }
 }
