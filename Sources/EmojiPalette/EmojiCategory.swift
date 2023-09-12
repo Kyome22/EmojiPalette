@@ -47,16 +47,18 @@ public enum EmojiCategory: String, Identifiable, CaseIterable {
         }
     }
 
-    init?(jsonCategoryType: JsonCategoryType) {
-        switch jsonCategoryType {
-        case .people:   self = .smileysAndPeople
-        case .nature:   self = .animalsAndNature
-        case .foods:    self = .foodAndDrink
-        case .activity: self = .activity
-        case .places:   self = .travelAndPlaces
-        case .objects:  self = .objects
-        case .symbols:  self = .symbols
-        case .flags:    self = .flags
+    init?(groupName: String) {
+        switch groupName {
+        case "Smileys & Emotion": self = .smileysAndPeople
+        case "People & Body": self = .smileysAndPeople
+        case "Animals & Nature": self = .animalsAndNature
+        case "Food & Drink": self = .foodAndDrink
+        case "Travel & Places": self = .travelAndPlaces
+        case "Activities": self = .activity
+        case "Objects": self = .objects
+        case "Symbols": self = .symbols
+        case "Flags": self = .flags
+        default: return nil
         }
     }
 }

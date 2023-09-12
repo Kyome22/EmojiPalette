@@ -12,12 +12,11 @@ public struct EmojiPaletteView: View {
     @Binding var selectedEmoji: String
     @State var emojiSets: [EmojiSet]
     @State var selection: EmojiCategory = .smileysAndPeople
-    private let parser = EmojiParser()
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 8), count: 6)
 
     public init(selectedEmoji: Binding<String>) {
         _selectedEmoji = selectedEmoji
-        emojiSets = parser.getEmojiSets()
+        emojiSets = EmojiParser.shared.emojiSet
     }
 
     public var body: some View {
@@ -54,7 +53,7 @@ public struct EmojiPaletteView: View {
                             .onTapGesture {
                                 selection = emojiCategory
                                 withAnimation {
-                                    proxy.scrollTo(emojiCategory, anchor: UnitPoint(x: 0, y: 0))
+                                    proxy.scrollTo(emojiCategory, anchor: UnitPoint.top)
                                 }
                             }
                     }
