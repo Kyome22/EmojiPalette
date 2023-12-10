@@ -1,7 +1,11 @@
+# Mac
 .DS_Store
-/.build
-*.xcuserstate
-/*.xcodeproj
+
+# Xcode
 xcuserdata/
-DerivedData/
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+*.xcuserstate
+
+# Swift Package Manager
+Packages.resolved
+.swiftpm/
+.build/
