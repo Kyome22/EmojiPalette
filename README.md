@@ -6,7 +6,7 @@ Emoji Picker for iOS using SwiftUI.
 
 ## Requirements
 
-- Development with Xcode 14.3.1+
+- Development with Xcode 15.2+
 - Written in Swift 5
 - swift-tools-version: 5.8
 - Compatible with iOS 16.4+
