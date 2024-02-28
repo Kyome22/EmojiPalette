@@ -62,8 +62,6 @@ public struct EmojiPaletteView: View {
     }
 }
 
-struct EmojiPaletteView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmojiPaletteView(selectedEmoji: .constant(""))
-    }
+#Preview {
+    EmojiPaletteView(selectedEmoji: .constant(""))
 }
