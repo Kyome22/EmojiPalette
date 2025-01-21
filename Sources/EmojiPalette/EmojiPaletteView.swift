@@ -11,8 +11,8 @@ import SwiftUI
 public struct EmojiPaletteView: View {
     @Binding var selectedEmoji: String
     @State var emojiSets: [EmojiSet]
-    @State var selection: EmojiCategory = .smileysAndPeople
-    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 8), count: 6)
+    @State var selection = EmojiCategory.smileysAndPeople
+    private var columns = [GridItem](repeating: .init(.flexible(), spacing: 8), count: 6)
 
     public init(selectedEmoji: Binding<String>) {
         _selectedEmoji = selectedEmoji

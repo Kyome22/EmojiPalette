@@ -6,10 +6,8 @@
  
 */
 
-public struct EmojiSet: Identifiable {
+public struct EmojiSet: Sendable, Identifiable {
     public var category: EmojiCategory
     public var emojis: [Emoji]
-    public var id: String {
-        return category.rawValue
-    }
+    public var id: String { category.rawValue }
 }

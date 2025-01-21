@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public enum EmojiCategory: String, Identifiable, CaseIterable {
+public enum EmojiCategory: String, Sendable, Identifiable, CaseIterable {
     case smileysAndPeople
     case animalsAndNature
     case foodAndDrink
@@ -18,46 +18,34 @@ public enum EmojiCategory: String, Identifiable, CaseIterable {
     case symbols
     case flags
 
-    public var id: String {
-        return rawValue
-    }
+    public var id: String { rawValue }
 
-    public var label: LocalizedStringKey {
-        return LocalizedStringKey(rawValue)
-    }
+    public var label: LocalizedStringKey { .init(rawValue) }
 
     public var imageName: String {
         switch self {
-        case .smileysAndPeople:
-            return "face.smiling"
-        case .animalsAndNature:
-            return "teddybear"
-        case .foodAndDrink:
-            return "fork.knife"
-        case .activity:
-            return "basketball"
-        case .travelAndPlaces:
-            return "car"
-        case .objects:
-            return "lightbulb"
-        case .symbols:
-            return "music.note"
-        case .flags:
-            return "flag"
+        case .smileysAndPeople: "face.smiling"
+        case .animalsAndNature: "teddybear"
+        case .foodAndDrink:     "fork.knife"
+        case .activity:         "basketball"
+        case .travelAndPlaces:  "car"
+        case .objects:          "lightbulb"
+        case .symbols:          "music.note"
+        case .flags:            "flag"
         }
     }
 
     init?(groupName: String) {
         switch groupName {
         case "Smileys & Emotion": self = .smileysAndPeople
-        case "People & Body": self = .smileysAndPeople
-        case "Animals & Nature": self = .animalsAndNature
-        case "Food & Drink": self = .foodAndDrink
-        case "Travel & Places": self = .travelAndPlaces
-        case "Activities": self = .activity
-        case "Objects": self = .objects
-        case "Symbols": self = .symbols
-        case "Flags": self = .flags
+        case "People & Body":     self = .smileysAndPeople
+        case "Animals & Nature":  self = .animalsAndNature
+        case "Food & Drink":      self = .foodAndDrink
+        case "Travel & Places":   self = .travelAndPlaces
+        case "Activities":        self = .activity
+        case "Objects":           self = .objects
+        case "Symbols":           self = .symbols
+        case "Flags":             self = .flags
         default: return nil
         }
     }

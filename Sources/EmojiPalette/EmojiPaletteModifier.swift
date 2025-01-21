@@ -11,8 +11,8 @@ import SwiftUI
 public struct EmojiPaletteModifier: ViewModifier {
     @Binding var selectedEmoji: String
     @Binding var isPresented: Bool
-    let attachmentAnchor: PopoverAttachmentAnchor
-    let arrowEdge: Edge
+    var attachmentAnchor: PopoverAttachmentAnchor
+    var arrowEdge: Edge
 
     public init(
         selectedEmoji: Binding<String>,
@@ -32,12 +32,8 @@ public struct EmojiPaletteModifier: ViewModifier {
             attachmentAnchor: attachmentAnchor,
             arrowEdge: arrowEdge
         ) {
-            if #available(iOS 16.4, *) {
-                EmojiPaletteView(selectedEmoji: $selectedEmoji)
-                    .presentationCompactAdaptation(.popover)
-            } else {
-                EmojiPaletteView(selectedEmoji: $selectedEmoji)
-            }
+            EmojiPaletteView(selectedEmoji: $selectedEmoji)
+                .presentationCompactAdaptation(.popover)
         }
     }
 }
@@ -49,7 +45,7 @@ extension View {
         attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds),
         arrowEdge: Edge = .top
     ) -> some View {
-        return modifier(EmojiPaletteModifier(
+        modifier(EmojiPaletteModifier(
             selectedEmoji: selectedEmoji,
             isPresented: isPresented,
             attachmentAnchor: attachmentAnchor,

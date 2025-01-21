@@ -6,7 +6,7 @@
  
 */
 
-public struct Emoji: Identifiable {
+public struct Emoji: Sendable, Identifiable {
     public var id: String
     public var character: String
 }

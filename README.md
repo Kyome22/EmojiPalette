@@ -6,9 +6,8 @@ Emoji Picker for iOS using SwiftUI.
 
 ## Requirements
 
-- Development with Xcode 15.2+
-- Written in Swift 5
-- swift-tools-version: 5.8
+- Development with Xcode 16.2+
+- Written in Swift 6.0
 - Compatible with iOS 16.4+
 
 ## Usage
@@ -34,7 +33,7 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            emoji = EmojiParser.shared.randomEmoji().character
+            emoji = EmojiParser.shared.randomEmoji()?.character ?? ""
         }
     }
 }
