@@ -33,6 +33,7 @@ public struct EmojiPaletteModifier: ViewModifier {
             arrowEdge: arrowEdge
         ) {
             EmojiPaletteView(selectedEmoji: $selectedEmoji)
+                .clipShape(Rectangle())
                 .presentationCompactAdaptation(.popover)
         }
     }

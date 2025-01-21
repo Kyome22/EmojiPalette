@@ -1,18 +1,10 @@
-# EmojiPalette
+//
+//  ContentView.swift
+//  Example
+//
+//  Created by Takuto Nakamura on 2025/01/22.
+//
 
-Emoji Picker for iOS using SwiftUI.
-
-<img src="./sample.png" width="300px" />
-
-## Requirements
-
-- Development with Xcode 16.2+
-- Written in Swift 6.0
-- Compatible with iOS 16.4+
-
-## Usage
-
-```swift
 import SwiftUI
 import EmojiPalette
 
@@ -28,6 +20,7 @@ struct ContentView: View {
                 Text(emoji)
                     .font(.largeTitle)
             }
+            .buttonStyle(.bordered)
             .emojiPalette(
                 selectedEmoji: $emoji,
                 isPresented: $showPopover
@@ -39,9 +32,7 @@ struct ContentView: View {
         }
     }
 }
-```
 
-## Localization
-
-- English (en)
-- Japanese (ja)
+#Preview {
+    ContentView()
+}
