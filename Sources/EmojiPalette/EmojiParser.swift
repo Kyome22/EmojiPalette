@@ -6,30 +6,32 @@
 
 */
 
-import SwiftUI
+import Foundation
+import os
 
-public final class EmojiParser {
+public final class EmojiParser: Sendable {
     public static let shared = EmojiParser()
 
-    private var _emojiSets = [EmojiSet]()
+    private let protectedEmojiSets = OSAllocatedUnfairLock<[EmojiSet]>(initialState: [])
 
     public var emojiSets: [EmojiSet] {
-        return _emojiSets
+        protectedEmojiSets.withLock(\.self)
     }
 
     private init() {
         let groups = loadEmojiGroup()
-        groups.forEach { group in
+        let emojiSets = groups.reduce(into: [EmojiSet]()) { partialResult, group in
             guard let category = EmojiCategory(groupName: group.name) else {
                 return
             }
-            let emojis = group.subgroups.flatMap { $0.emojis }
-            if _emojiSets.last?.category == category {
-                _emojiSets[_emojiSets.count - 1].emojis += emojis
+            let emojis = group.subgroups.flatMap(\.emojis)
+            if partialResult.last?.category == category {
+                partialResult[partialResult.count - 1].emojis += emojis
             } else {
-                _emojiSets.append(EmojiSet(category: category, emojis: emojis))
+                partialResult.append(EmojiSet(category: category, emojis: emojis))
             }
         }
+        protectedEmojiSets.withLock { $0 = emojiSets }
     }
 
     private func loadEmojiGroup() -> [EmojiGroup] {
@@ -59,10 +61,10 @@ public final class EmojiParser {
                    let status = separatedByHash.first?.trimmingCharacters(in: .whitespaces),
                    let afterHash = separatedByHash.last?.trimmingCharacters(in: .whitespaces),
                    let emoji = afterHash.components(separatedBy: .whitespaces).first {
-                    if status == "unqualified" || status == "minimally-qualified" {
+                    guard status != "unqualified" && status != "minimally-qualified" else {
                         return
                     }
-                    if afterHash.contains(":") && afterHash.contains("skin tone") {
+                    guard !afterHash.contains(":") || !afterHash.contains("skin tone") else {
                         return
                     }
                     var array = afterHash.components(separatedBy: " ")
@@ -78,11 +80,11 @@ public final class EmojiParser {
         return groups
     }
 
-    public func randomEmoji(categories: [EmojiCategory] = EmojiCategory.allCases) -> Emoji {
-        let emojiSet = _emojiSets.filter { categories.contains($0.category) }.randomElement()
-        guard let emoji = emojiSet?.emojis.randomElement() else {
-            fatalError("Could not get random emoji")
-        }
-        return emoji
+    public func randomEmoji(categories: [EmojiCategory] = EmojiCategory.allCases) -> Emoji? {
+        protectedEmojiSets.withLock(\.self)
+            .filter { categories.contains($0.category) }
+            .randomElement()?
+            .emojis
+            .randomElement()
     }
 }
