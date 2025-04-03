@@ -12,13 +12,13 @@ public struct EmojiPaletteModifier: ViewModifier {
     @Binding var selectedEmoji: String
     @Binding var isPresented: Bool
     var attachmentAnchor: PopoverAttachmentAnchor
-    var arrowEdge: Edge
+    var arrowEdge: Edge?
 
     public init(
         selectedEmoji: Binding<String>,
         isPresented: Binding<Bool>,
         attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds),
-        arrowEdge: Edge = .top
+        arrowEdge: Edge? = nil
     ) {
         _selectedEmoji = selectedEmoji
         _isPresented = isPresented
@@ -44,7 +44,7 @@ extension View {
         selectedEmoji: Binding<String>,
         isPresented: Binding<Bool>,
         attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds),
-        arrowEdge: Edge = .top
+        arrowEdge: Edge? = nil
     ) -> some View {
         modifier(EmojiPaletteModifier(
             selectedEmoji: selectedEmoji,
